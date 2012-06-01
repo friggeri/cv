@@ -1,0 +1,169 @@
+%!TEX TS-program = xelatex
+\documentclass[]{friggeri-cv}
+\usepackage{xparse,expl3}
+\makeatletter
+\ExplSyntaxOn
+\cs_new_protected:Npn \frigger_sectioncolor: {%
+  \prg_case_int:nnn {\value{colorCounter}}
+  {%
+    {0} {\color{blue}}
+    {1} {\color{red}}
+    {2} {\color{orange}}
+    {3} {\color{green}}
+    {4} {\color{purple}}
+  }
+  {\color{headercolor}}
+}
+
+\DeclareDocumentCommand \section{m m}{%
+  \par\vspace{\parskip}
+  {%
+    \LARGE\headingfont\color{headercolor}%
+    \int_set:Nn \l_tmpa_int {0}
+    \tl_set:Nn \l_tmpa_tl {#2}
+    \tl_replace_all:Nnn \l_tmpa_tl {~} {\nil}
+    \tl_map_inline:Nn \l_tmpa_tl
+    {%
+      \str_if_eq:nnTF {##1} {\nil}
+      {~}
+      {%
+        \int_compare:nNnTF {\l_tmpa_int} < {#1}
+        {%
+          \group_begin:
+          \frigger_sectioncolor: ##1
+          \group_end:
+        }
+        {##1}
+      }
+      \int_gincr:N \l_tmpa_int
+    }
+    \int_gincr:N \c@colorCounter
+  }
+  \par\vspace{\parskip}
+}
+\ExplSyntaxOff
+\makeatother
+
+\begin{document}
+\header{William}{Ting}
+%{software developer}
+
+% In the aside, each new line forces a line break
+\begin{aside}
+  \section{about}
+  \href{mailto:i.am@williamting.com}{i.am@williamting.com}
+  %\href{mailto:william.h.ting@gmail.com}{william.h.ting@gmail}
+  \href{https://github.com/wting}{github.com/wting}
+  512.670.8464
+  \section{programming}
+  {\color{red} $\varheartsuit$} Python
+  C, C++, Java,
+  PHP, JavaScript,
+  Haskell
+  %, \LaTeX
+  \section{technologies}
+  Flask, Django,
+  SQLAlchemy, CodeIgniter,
+  GNU toolchain,
+  GDB, gprof, Valgrind,
+  Git, Subversion
+  \section{databases}
+  PostgreSQL,
+  MySQL, SQLite
+  \section{languages}
+  English,
+  Japanese, Chinese
+\end{aside}
+
+\section{3}{education}
+
+\begin{entrylist}
+  \entry
+  {2013 12}
+  {Major: Computer Science, BS}
+  {University of Texas at Austin}
+  {Minor: Business Foundations}
+\end{entrylist}
+
+%\section{3}{interests}
+
+%network security, functional programming, distributed computing, compilers,
+%parallel algorithms
+
+%\section{6}{coursework}
+
+%algorithms, distributed computing, network security,
+%computer security, software engineering, object oriented programming
+
+\section{3}{experience}
+
+\begin{entrylist}
+  \entry
+  {2012 05–08}
+  {Google Summer of Code (GNOME – Epiphany)}
+  {Student Developer}
+  {Implemented browser synchronization using Firefox's Sync Server.}
+  \entry
+  {2011 05–12}
+  {Web Developer}
+  {Freelance}
+  {\emph{WorkThruLunch.com}: Groupon-clone variant.
+  \\* \emph{ObviousApps.com}: Mobile app voting/ranking site.}
+  \entry
+  {2007–2010}
+  {Dynapack International}
+  {Project Manager}
+  {Created project schedules, objectives, testing, and requirements in conjunction
+  with Dell's laptop battery engineering team.}
+  \entry
+  {2009 05–08}
+  {IBM Tivoli Software}
+  {Software Engineering Intern}
+  {Developed basic search engine to parse, store, and search 100,000+ record data
+  set. Also developed a corresponding web app to consolidate and cache data
+  while providing a browser-based search interface to the analytics program.}
+  \entry
+  {2008 05–12}
+  {IBM Lotus Software}
+  {Software Engineering Coop}
+  {Created a departmental internal social web mashup for use with new hires.
+  Provided enterprise support, basic QA, and technical documentation for Lotus
+  Domino server.}
+\end{entrylist}
+
+\section{4}{open source}
+
+\begin{entrylist}
+  \entry
+  {2012}
+  {GNOME – Epiphany}
+  {Major Contributor}
+  {Add new features, bug reports, patches. Confirm and triage existing bugs.}
+  \entry
+  {2011–2012}
+  {Autojump}
+  {Upstream Maintainer
+  \\* \href{https://github.com/joelthelion/autojump}{github.com/joelthelion/autojump}}
+  {Command line program that helps easily navigate directories by learning
+  from user behavior. Available in Debian/RedHat repos, 5000+ countable active users.}
+  \entry
+  {2012}
+  {PythonBrew}
+  {Minor Contributor
+  \\* \href{https://github.com/utahta/pythonbrew}{github.com/utahta/pythonbrew}}
+  {Python environment manager and virtualenv wrapper.}
+  \entry
+  {2012}
+  {JHBuild}
+  {Package Maintainer
+  \\* \href{https://aur.archlinux.org/packages.php?ID=37340}{aur.archlinux.org/packages.php?ID=37340}}
+  {GNOME's build automation tool that discovers and builds dependency modules.}
+  \entry
+  {2009–2010}
+  {ExifRenamer}
+  {Author
+  \\* \href{https://github.com/wting/exifrenamer}{github.com/wting/exifrenamer}}
+  {Organizes and renames photos based on timestamp metadata.}
+\end{entrylist}
+
+\end{document}
