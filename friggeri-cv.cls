@@ -19,7 +19,7 @@
 
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{gray}{HTML}{4D4D4D}
-\definecolor{lightgray}{HTML}{999999}
+\definecolor{lightgray}{HTML}{606060}
 
 \definecolor{green}{HTML}{C2E15F}
 \definecolor{orange}{HTML}{FDA333}
@@ -49,12 +49,16 @@
 \RequirePackage[quiet]{fontspec}
 \RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
 
-\newfontfamily\bodyfont[]{Helvetica Neue}
-\newfontfamily\thinfont[]{Helvetica Neue UltraLight}
-\newfontfamily\headingfont[]{Helvetica Neue Condensed Bold}
+\newfontfamily\bodyfont[]{Proxima Nova}
+\newfontfamily\headingfont[]{Proxima Nova Semibold}
+
+%\newfontfamily\titlethinfont[]{Proxima Nova Light}
+%\newfontfamily\titleboldfont[]{Proxima Nova Semibold}
+\newfontfamily\titlethinfont[]{Ostrich Sans}
+\newfontfamily\titleboldfont[]{Ostrich Sans Bold}
 
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text, Color=textcolor]{Helvetica Neue Light}
+\setmainfont[Mapping=tex-text, Color=textcolor]{Proxima Nova}
 
 \setmathfont{XITS Math}
 
@@ -66,7 +70,7 @@
 
 \newcommand{\rolefont}{%
   \fontsize{14pt}{24pt}\selectfont%
-  \thinfont%
+  \titlethinfont%
   \color{white}%
 }
 
@@ -74,12 +78,16 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node [rectangle, fill=fillheader, anchor=north, minimum width=\paperwidth, minimum height=4cm] (box) at (current page.north){};
     \node [anchor=center] (name) at (box) {%
-      \fontsize{40pt}{72pt}\color{header}%
-      {\thinfont #1}{\bodyfont  #2}
+      %\fontsize{40pt}{72pt}\color{header}%
+      %{\titlethinfont #1}{\titleboldfont  #2}
+      \fontsize{88pt}{96pt}\color{header}%
+      {\titlethinfont #1}
+      \fontsize{80pt}{96pt}\color{header}%
+      {\titleboldfont  #2}
     };
     \node [anchor=north] at (name.south) {%
       \fontsize{14pt}{24pt}\color{header}%
-      \thinfont #3%
+      \titlethinfont #3%
     };
   \end{tikzpicture}
   \vspace{2.5cm}
@@ -108,7 +116,7 @@
   \stepcounter{colorCounter}%
 }
 
-\renewcommand{\section}[1]{
+\renewcommand{\section}[2]{
   \par\vspace{\parskip}
   {%
     \LARGE\headingfont\color{headercolor}%
@@ -138,7 +146,8 @@
 }
 \renewcommand{\bfseries}{\headingfont\color{headercolor}}
 \newcommand{\entry}[4]{%
-  #1&\parbox[t]{11.8cm}{%
+    %TODO: change font to monospace
+    #1&\parbox[t]{11.8cm}{%
     \textbf{#2}%
     \hfill%
     {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
