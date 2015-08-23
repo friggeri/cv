@@ -49,12 +49,17 @@
 \RequirePackage[quiet]{fontspec}
 \RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
 
-\newfontfamily\bodyfont[]{Helvetica Neue}
-\newfontfamily\thinfont[]{Helvetica Neue UltraLight}
-\newfontfamily\headingfont[]{Helvetica Neue Condensed Bold}
+\newfontfamily\bodyfont
+[BoldFont=Roboto-Bold.ttf,
+ItalicFont=Roboto-Italic.ttf,
+BoldItalicFont=Roboto-BoldItalic.ttf]
+{Roboto-Regular.ttf}
+
+\newfontfamily\thinfont[]{Roboto-Thin.ttf}
+\newfontfamily\headingfont[]{RobotoCondensed-Bold.ttf}
 
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Mapping=tex-text, Color=textcolor]{Helvetica Neue Light}
+\setmainfont[Mapping=tex-text, Color=textcolor]{Roboto-Light.ttf}
 
 \setmathfont{XITS Math}
 
